@@ -1,0 +1,21 @@
+name: Deploy
+
+on: push
+
+jobs:
+  deploy:
+    if: startsWith(github.event.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install requirements
+        run: pip install --upgrade setuptools twine
+      - name: Build ConsNet
+        run: python setup.py sdist
+      - name: Publish to PyPI
+        run: twine upload dist/* -u __token__ -p ${{ secrets.PYPI_TOKEN }}
