@@ -47,11 +47,11 @@ setup(
         'Topic :: Utilities',
     ],
     python_requires='>=3.8',
-    install_requires=[
-        'nncore>=0.2.2', 'scipy>=1.6', 'torch>=1.6', 'torchvision>=0.7'
-    ],
+    install_requires=['nncore>=0.2.2', 'scipy>=1.6', 'torch>=1.6'],
     extras_require={
-        'full':
-        ['allennlp>=2.2,<2.3', 'mmcv-full>=1.3,<1.4', 'mmdet>=2.11,<2.12']
+        'full': [
+            'allennlp>=2.2,<2.3', 'mmcv-full>=1.3,<1.4', 'mmdet>=2.11,<2.12',
+            'torchvision>=0.7'
+        ]
     },
     packages=find_packages(exclude=('.github', 'configs', 'docs', 'tools')))

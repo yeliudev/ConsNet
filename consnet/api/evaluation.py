@@ -94,7 +94,7 @@ def hico_det_eval(blob,
     Returns:
         dict: Evaluation results including mean average precision (mAP) and \
             mean recall (mRec) values of multiple dataset splits under \
-            different evaluation mode.
+            different evaluation modes.
 
     Example:
         >>> results = hico_det_eval(blob, '<path-to-anno_bbox.mat>')

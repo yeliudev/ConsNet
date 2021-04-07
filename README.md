@@ -194,13 +194,13 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
       <a href="https://github.com/yeliudev/ConsNet/blob/main/configs/consnet_5e_hico_det.py">ConsNet</a>
     </td>
     <td align="center">—</td>
-    <td align="center">—</td>
-    <td align="center">—</td>
-    <td align="center">—</td>
+    <td align="center">22.15</td>
+    <td align="center">17.55</td>
+    <td align="center">23.52</td>
     <td align="center">—</td>
     <td align="center">—</td>
     <td align="center">
-      <a href="">model</a> |
+      <a href="https://catcatserver.xyz/models/consnet/consnet_5e_hico_det/consnet_5e_hico_det-6e89e1d9.pth">model</a> |
       <a href="https://catcatserver.xyz/models/consnet/consnet_5e_hico_det/metrics.json">metrics</a>
     </td>
   </tr>

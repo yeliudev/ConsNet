@@ -5,7 +5,6 @@
 # -----------------------------------------------------
 
 from nncore import Registry, build_object
-from nncore.engine import load_checkpoint, set_random_seed
 from nncore.parallel import NNDataParallel, collate
 from torch.utils.data import DataLoader
 
@@ -16,6 +15,7 @@ try:
     from mmdet.datasets import DATASETS
     from mmdet.datasets import build_dataloader as _build_dataloader
     from mmdet.datasets import build_dataset as _build_dataset
+    from nncore.engine import load_checkpoint, set_random_seed
 except ImportError:
     pass
 
