@@ -15,22 +15,22 @@ from .builder import DATASETS
 @DATASETS.register()
 class HICO_DET(Dataset):
 
-    def __init__(self, blob, neg_pos_ub=-1, zero_shot=None, eval=None):
+    def __init__(self, blob, neg_pos_ub=0, zero_shot=None, eval=None):
         print('loading annotations into memory...')
         self._blob = blob
         self._neg_pos_ub = neg_pos_ub
         self._eval = eval
+        self._key = 'gt' if neg_pos_ub == -1 else 'pos'
         self._neg_inds = []
 
         with nncore.open(blob) as f:
-            self._num_neg = f['neg'].shape[0]
             if zero_shot is not None:
                 hoi_idx = get_unseen_hoi_idx(**zero_shot)
-                pos_label = torch.from_numpy(f['pos'][:, 2217:])
+                pos_label = torch.from_numpy(f[self._key][:, 2217:])
                 inds = (pos_label[:, hoi_idx] == 0).all(dim=1).nonzero()[:, 0]
                 self._pos_inds = inds.int().tolist()
             else:
-                self._pos_inds = list(range(f['pos'].shape[0]))
+                self._pos_inds = list(range(f[self._key].shape[0]))
 
     def __exit__(self):
         if hasattr(self._blob, 'close'):
@@ -44,11 +44,12 @@ class HICO_DET(Dataset):
             self._blob = nncore.open(self._blob)
 
         idx = self._pos_inds[idx]
-        mix_blob = torch.from_numpy(self._blob['pos'][[idx]])
+        mix_blob = torch.from_numpy(self._blob[self._key][[idx]])
 
         if (fac := self._neg_pos_ub) > 0:
             if len(self._neg_inds) < fac:
-                self._neg_inds = torch.randperm(self._num_neg).tolist()
+                num_neg = self._blob['neg'].shape[0]
+                self._neg_inds = torch.randperm(num_neg).tolist()
             inds = [self._neg_inds.pop() for _ in range(fac)]
             neg_blob = [torch.from_numpy(self._blob['neg'][[i]]) for i in inds]
             mix_blob = torch.cat((mix_blob, *neg_blob))

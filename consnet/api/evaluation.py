@@ -64,22 +64,22 @@ def hico_det_eval(blob,
                   logger=None):
     """
     Perform standard evaluation on HICO-DET dataset using mean average
-    precision (mAP) as described in [1].
+    precision (mAP) as introduced in [1].
 
     Args:
         blob (list[:obj:`Tensor[N, 10]`]): Human-object pairs and their
             detection scores to be evaluated. The length of the list should be
-            600 and each item is an ``N * 10`` tensor in
+            600 and each item should be an ``N * 10`` tensor in
             ``(batch_id, x1, y1, x2, y2, ..., score)`` format.
-        anno (:obj:`torch.Tensor` or str): The annotation object or path to
+        anno (:obj:`torch.Tensor` or str): The annotations object or path to
             the ``anno_bbox.mat`` file.
         split (str, optional): The dataset split to be evaluated. Expected
-            values include ``'train'`` and ``'test'``.
+            values are ``'train'`` and ``'test'``.
         mode (list[str] or str, optional): Mode of evaluation. Expected values
-            include ``'def'``, ``'ko'`` and a list containing these terms,
+            are ``'def'``, ``'ko'`` or a list containing these terms,
             denoting the default mode and known-object mode introduced in [1].
         zero_shot (dict or None, optional): Configurations for zero-shot
-            scenarios. It should contain the following fields:
+            settings. It should contain the following fields:
 
             - `type` (str): Expected values include ``'uc'``, ``'ub'`` and \
                 ``'ua'``, representing unseen action-object combination, \

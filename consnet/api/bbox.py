@@ -37,8 +37,8 @@ def pair_nms(bboxes,
              score_thr=1e-6):
     """
     Perform non-maximum suppression (NMS) on human-object pairs. This method
-    supports five nms types including fast nms [1], cluster nms [2], normal
-    nms [3] and soft nms [4] with linear or gaussian suppression terms.
+    supports multiple NMS types including Fast NMS [1], Cluster NMS [2], Normal
+    NMS [3] and Soft NMS [4] with linear or gaussian suppression terms.
 
     Args:
         bboxes (:obj:`Tensor[N, 9]`): Batches of human-object pairs to be
@@ -46,26 +46,26 @@ def pair_nms(bboxes,
             ``(batch_id, x1, y1, x2, y2, ...)`` format.
         scores (:obj:`Tensor[N]`): Human-object interaction detection scores
             to be considered.
-        method (str, optional): Type of nms. Expected values include
+        method (str, optional): Type of NMS. Expected values include
             ``'fast'``, ``'cluster'``, ``'normal'``, ``'linear'`` and
-            ``'gaussian'``, indicating fast nms, cluster nms, normal nms and
-            soft nms with linear or gaussian suppression terms.
-        hard_thr (float, optional): Hard threshold of nms. This attribute
-            is applied to all nms methods. Human-object pairs with IoU higher
+            ``'gaussian'``, indicating Fast NMS, Cluster NMS, Normal NMS and
+            Soft NMS with linear or gaussian suppression terms.
+        hard_thr (float, optional): Hard threshold of NMS. This attribute
+            is applied to all NMS methods. Human-object pairs with IoUs higher
             than this value will be discarded.
-        soft_thr (float, optional): Soft threshold of nms. This attribute
+        soft_thr (float, optional): Soft threshold of NMS. This attribute
             is only applied to ``linear`` and ``gaussian`` methods.
-            Human-object pairs with IoU lower than ``hard_thr`` but higher
+            Human-object pairs with IoUs lower than ``hard_thr`` but higher
             than this value will be suppressed in a soft manner.
         sigma (float, optional): Hyperparameter for ``gaussian`` method.
-        score_thr (float, optional): Score filter threshold. This attribute
-            is applied to ``normal``, ``linear`` and ``gaussian`` methods.
+        score_thr (float, optional): Score threshold. This attribute is
+            applied to ``normal``, ``linear`` and ``gaussian`` methods.
             Human-object pairs with suppressed scores lower than this value
             will be discarded.
 
     Returns:
         :obj:`Tensor[N, 10]`: Human-object pairs and their updated scores \
-            after nms. The values are expected to be in \
+            after NMS. The values are expected to be in \
             ``(batch_id, x1, y1, x2, y2, ..., score)`` format.
 
     References:

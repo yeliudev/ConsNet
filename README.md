@@ -142,7 +142,7 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
     <th>Unseen</th>
   </tr>
   <tr>
-    <td align="center" rowspan="4">
+    <td align="center" rowspan="5">
       <a href="https://catcatserver.xyz/models/faster_rcnn_r50_fpn_3x_coco-26df6f6b.pth">COCO</a>
     </td>
     <td align="center">
@@ -191,6 +191,21 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
   </tr>
   <tr>
     <td align="center">
+      <a href="https://github.com/yeliudev/ConsNet/blob/main/configs/consnet_gt_5e_hico_det.py">ConsNet</a>
+    </td>
+    <td align="center">GT</td>
+    <td align="center">53.04</td>
+    <td align="center">38.79</td>
+    <td align="center">57.3</td>
+    <td align="center">—</td>
+    <td align="center">—</td>
+    <td align="center" rowspan="2">
+      <a href="https://catcatserver.xyz/models/consnet/consnet_5e_hico_det/consnet_5e_hico_det-6e89e1d9.pth">model</a> |
+      <a href="https://catcatserver.xyz/models/consnet/consnet_5e_hico_det/metrics.json">metrics</a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
       <a href="https://github.com/yeliudev/ConsNet/blob/main/configs/consnet_5e_hico_det.py">ConsNet</a>
     </td>
     <td align="center">—</td>
@@ -199,10 +214,6 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
     <td align="center">23.52</td>
     <td align="center">—</td>
     <td align="center">—</td>
-    <td align="center">
-      <a href="https://catcatserver.xyz/models/consnet/consnet_5e_hico_det/consnet_5e_hico_det-6e89e1d9.pth">model</a> |
-      <a href="https://catcatserver.xyz/models/consnet/consnet_5e_hico_det/metrics.json">metrics</a>
-    </td>
   </tr>
   <tr>
     <td align="center">
@@ -224,7 +235,7 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
   </tr>
 </table>
 
-Note that: Type `UC`, `UO` and `UA` represent unseen action-object combination, unseen object and unseen action scenarios introduced in the paper respectively.
+Note that: Type `UC`, `UO`, `UA` and `GT` represent unseen action-object combination, unseen object, unseen action and ground truth scenarios respectively.
 
 ## Customization
 

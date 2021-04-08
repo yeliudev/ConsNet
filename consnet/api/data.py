@@ -25,7 +25,7 @@ def convert_anno(anno_file, out_file, split):
         out_file (str): Path to the output file. The filename must end with
             ``'.json'``.
         split (str): The dataset split to be converted. Expected values
-            include ``'train'`` and ``'test'``.
+            are ``'train'`` and ``'test'``.
 
     References:
         1. Chao et al. (https://arxiv.org/abs/1702.05448)
@@ -87,14 +87,14 @@ def load_anno(anno_file, split):
     """
     Load annotations of HICO-DET [1] dataset.
 
-    The loaded annotations will be an ``N * 10`` tensor whose rows are in
-    ``(img_id, hoi_idx, human_bbox, object_bbox)`` format. The ``hoi_idx``
-    will be in the range of ``0 ~ 599`` and the bboxes will be in ``xyxy``
-    style. Annotations of invisible human-object pairs will be ignored.
+    The loaded annotations will be stored in an ``N * 10`` tensor whose rows
+    are in ``(img_id, hoi_idx, human_bbox, object_bbox)`` format. The
+    ``hoi_idx`` will be in the range of ``0 ~ 599`` and the bboxes will be in
+    ``xyxy`` style. Invisible human-object pairs will be discarded.
 
     Args:
         anno_file (str): Path to the ``anno_bbox.mat`` file.
-        split (str): The dataset split to be loaded. Expected values include
+        split (str): The dataset split to be loaded. Expected values are
             ``'train'`` and ``'test'``.
 
     Returns:

@@ -63,7 +63,12 @@ def build_dataset(annos, blobs, cfg, split, f):
         img_anno = anno[anno[:, 0] == img_id][:, 1:]
         img_blob = blob[img_id]
 
+        gt_blob = img_blob['gt']
         dt_blob = img_blob['dt']
+
+        gt_blob = gt_blob.split(int(gt_blob.size(0) / 2))
+        gt_blob = [b.split((4, 80, 1024), dim=1) for b in gt_blob]
+        gt_blob = torch.cat(nncore.concat_list(zip(*gt_blob)), dim=1)
 
         h_blob = dt_blob[dt_blob[:, -1] == 0][:, :-1]
         o_blob = dt_blob[dt_blob[:, -1] == 1][:, :-1]
@@ -98,43 +103,45 @@ def build_dataset(annos, blobs, cfg, split, f):
 
         if dt_blob.numel() > 0:
             m_iou = pair_iou(dt_blob[:, :8], img_anno[:, 1:]).amax(dim=1)
-            pos_inds = (m_iou >= cfg.iou_thr.pos).nonzero()[:, 0]
-            neg_inds = (m_iou < cfg.iou_thr.neg).nonzero()[:, 0]
+            po_inds = (m_iou >= cfg.iou_thr.pos).nonzero()[:, 0]
+            ne_inds = (m_iou < cfg.iou_thr.neg).nonzero()[:, 0]
         else:
-            pos_inds = neg_inds = []
+            po_inds = ne_inds = []
 
-        pos_blob = dt_blob[pos_inds]
-        neg_blob = dt_blob[neg_inds]
+        po_blob = dt_blob[po_inds]
+        ne_blob = dt_blob[ne_inds]
+
+        gt_label = torch.zeros((gt_blob.size(0), 600))
+        po_label = torch.zeros((po_blob.size(0), 600))
+        ne_label = torch.zeros((ne_blob.size(0), 600))
+
+        gt_iou = pair_iou(gt_blob[:, :8], img_anno[:, 1:])
+        po_iou = pair_iou(po_blob[:, :8], img_anno[:, 1:])
+
+        for i, iou in enumerate(gt_iou):
+            gt_label[i][img_anno[:, 0][iou >= 0.5].long()] = 1
+
+        for i, iou in enumerate(po_iou):
+            po_label[i][img_anno[:, 0][iou >= 0.5].long()] = 1
+
+        gt_img_id = torch.full((gt_blob.size(0), 1), img_id)
+        po_img_id = torch.full((po_blob.size(0), 1), img_id)
+        ne_img_id = torch.full((ne_blob.size(0), 1), img_id)
+
+        gt_blob = torch.cat((gt_img_id, gt_blob, gt_label), dim=1)
+        po_blob = torch.cat((po_img_id, po_blob, po_label), dim=1)
+        ne_blob = torch.cat((ne_img_id, ne_blob, ne_label), dim=1)
 
         if split == 'train':
-            gt_blob = img_blob['gt']
-            gt_blob = gt_blob.split(int(gt_blob.size(0) / 2))
-            gt_blob = [b.split((4, 80, 1024), dim=1) for b in gt_blob]
-            gt_blob = torch.cat(nncore.concat_list(zip(*gt_blob)), dim=1)
-            pos_blob = torch.cat((pos_blob, gt_blob))
-
+            po_blob = torch.cat((po_blob, gt_blob))
             if (fac := cfg.neg_pos_ub) > 0:
-                neg_blob = neg_blob[:pos_blob.size(0) * fac]
-
-        iou = pair_iou(pos_blob[:, :8], img_anno[:, 1:])
-        pos_label = torch.zeros((pos_blob.size(0), 600))
-        neg_label = torch.zeros((neg_blob.size(0), 600))
-
-        for i, pos_iou in enumerate(iou):
-            pos_label[i][img_anno[:, 0][pos_iou >= 0.5].long()] = 1
-
-        pos_img_id = torch.full((pos_blob.size(0), 1), img_id)
-        neg_img_id = torch.full((neg_blob.size(0), 1), img_id)
-
-        pos_blob = torch.cat((pos_img_id, pos_blob, pos_label), dim=1)
-        neg_blob = torch.cat((neg_img_id, neg_blob, neg_label), dim=1)
-
-        if split == 'test':
-            pos_blob = torch.cat((pos_blob, neg_blob))
-            neg_blob = torch.empty(0, 2817)
-
-        nncore.dump(pos_blob.numpy(), f, format='h5', dataset='pos')
-        nncore.dump(neg_blob.numpy(), f, format='h5', dataset='neg')
+                ne_blob = ne_blob[:po_blob.size(0) * fac]
+            nncore.dump(po_blob.numpy(), f, format='h5', dataset='pos')
+            nncore.dump(ne_blob.numpy(), f, format='h5', dataset='neg')
+        else:
+            po_blob = torch.cat((po_blob, ne_blob))
+            nncore.dump(gt_blob.numpy(), f, format='h5', dataset='gt')
+            nncore.dump(po_blob.numpy(), f, format='h5', dataset='pos')
 
         prog_bar.update()
 
