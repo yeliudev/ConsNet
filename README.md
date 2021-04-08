@@ -23,7 +23,7 @@ The ConsNet package could be installed directly from PyPI or manually from sourc
 
 ### Install from PyPI
 
-You may install ConsNet from PyPI and import it in your own project as a Python package. This library implements several useful functionalities including [Pair IoU](https://consnet.readthedocs.io/en/latest/bbox.html#consnet.api.bbox.pair_iou), [Pair NMS](https://consnet.readthedocs.io/en/latest/bbox.html#consnet.api.bbox.pair_nms) and [unified APIs for HICO-DET dataset](https://consnet.readthedocs.io/en/latest/data.html).
+You may install ConsNet from PyPI and import it in your own project as a Python package. This library implements several useful functionalities including [Pair IoU](https://consnet.readthedocs.io/en/latest/consnet.api.bbox.html#consnet.api.bbox.pair_iou), [Pair NMS](https://consnet.readthedocs.io/en/latest/consnet.api.bbox.html#consnet.api.bbox.pair_nms) and [unified APIs for HICO-DET dataset](https://consnet.readthedocs.io/en/latest/consnet.api.data.html).
 
 Simply run the following command to install the latest version of ConsNet.
 
