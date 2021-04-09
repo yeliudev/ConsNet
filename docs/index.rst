@@ -9,7 +9,7 @@ ConsNet API is a part of the `ConsNet <https://github.com/yeliudev/ConsNet>`_ pr
 - Data Processing
    - `Convert IDs among actions, objects and interactions <https://consnet.readthedocs.io/en/latest/consnet.api.data.html>`_
    - `Compute intersection-over-unions (IoUs) among human-object pairs <https://consnet.readthedocs.io/en/latest/consnet.api.bbox.html#consnet.api.bbox.pair_iou>`_
-   - `Perform non-maximum suppression (NMS) among human-object pairs <https://consnet.readthedocs.io/en/latest/consnet.api.bbox.html#consnet.api.bbox.pair_nms>`_
+   - `Perform non-maximum suppression (NMS) on human-object pairs <https://consnet.readthedocs.io/en/latest/consnet.api.bbox.html#consnet.api.bbox.pair_nms>`_
 - Standard Evaluation
    - `Evaluate HOI detection results on HICO-DET dataset <https://consnet.readthedocs.io/en/latest/consnet.api.evaluation.html#consnet.api.evaluation.hico_det_eval>`_
 
