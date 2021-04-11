@@ -19,7 +19,7 @@ The ConsNet package could be installed directly from PyPI or manually from sourc
 - PyTorch 1.8.1
 - [MMDetection](https://github.com/open-mmlab/mmdetection) 2.11.0
 - [AllenNLP](https://github.com/allenai/allennlp) 2.2.0
-- [NNCore](https://github.com/yeliudev/nncore) 0.2.2
+- [NNCore](https://github.com/yeliudev/nncore) 0.2.3
 
 ### Install from PyPI
 

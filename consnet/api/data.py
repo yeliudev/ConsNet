@@ -8,12 +8,10 @@ import nncore
 import torch
 from scipy.io import loadmat
 
-from .static import (ACT_IDX_TO_ACT_NAME, ACT_IDX_TO_HOI_IDX,
-                     HOI_IDX_TO_ACT_IDX, HOI_IDX_TO_COCO_ID,
-                     HOI_IDX_TO_OBJ_IDX, NON_RARE_HOI_IDX, OBJ_IDX_TO_COCO_ID,
-                     OBJ_IDX_TO_HOI_IDX, OBJ_IDX_TO_OBJ_NAME, RARE_HOI_IDX,
-                     UNSEEN_ACT_HOI_IDX, UNSEEN_COM_HOI_IDX,
-                     UNSEEN_OBJ_HOI_IDX)
+from .static import (ACT_IDX_TO_ACT_NAME, HOI_IDX_TO_ACT_IDX,
+                     HOI_IDX_TO_OBJ_IDX, OBJ_IDX_TO_COCO_ID,
+                     OBJ_IDX_TO_OBJ_NAME, RARE_HOI_IDX, UA_HOI_IDX, UC_HOI_IDX,
+                     UO_HOI_IDX)
 
 
 def convert_anno(anno_file, out_file, split):
@@ -38,13 +36,14 @@ def convert_anno(anno_file, out_file, split):
     print(f'converting annotations of *{split}* split')
 
     mat_anno = loadmat(anno_file)[f'bbox_{split}'][0]
-    converted, img_id, anno_id = dict(
-        images=[],
-        annotations=[],
-        categories=[
-            dict(id=obj_idx_to_coco_id(idx), name=get_obj_name(idx))
-            for idx in range(80)
-        ]), 0, 0
+    coco_anno, img_id, anno_id = dict(
+        images=[], annotations=[], categories=[]), 0, 0
+
+    for idx in range(80):
+        coco_anno['categories'].append(
+            dict(
+                id=obj_idx_to_coco_id(idx),
+                name=get_obj_name(idx).replace('_', ' ')))
 
     prog_bar = nncore.ProgressBar(num_tasks=len(mat_anno))
     for img_anno in mat_anno:
@@ -56,7 +55,7 @@ def convert_anno(anno_file, out_file, split):
             for i in range(1, 3):
                 cat_id = 1 if i == 1 else hoi_idx_to_coco_id(int(ins[0]) - 1)
                 for bbox in ins[i][0]:
-                    x1, x2, y1, y2 = [int(c) for c in bbox]
+                    x1, x2, y1, y2 = map(int, bbox)
                     x, y, w, h = x1, y1, x2 - x1, y2 - y1
                     ins_anno = dict(
                         id=anno_id,
@@ -73,14 +72,14 @@ def convert_anno(anno_file, out_file, split):
                 file_name=str(img_anno[0][0]),
                 width=int(img_anno[1][0][0][0]),
                 height=int(img_anno[1][0][0][1]))
-            converted['images'].append(img_info)
-            converted['annotations'] += anno
+            coco_anno['images'].append(img_info)
+            coco_anno['annotations'] += anno
             img_id += 1
 
         prog_bar.update()
 
     print(f'saving results to {out_file}...')
-    nncore.dump(converted, out_file)
+    nncore.dump(coco_anno, out_file)
 
 
 def load_anno(anno_file, split):
@@ -144,6 +143,7 @@ def load_anno(anno_file, split):
     return torch.cat(collected)
 
 
+@nncore.recursive()
 def obj_idx_to_coco_id(obj_idx):
     """
     Convert object index (0 ~ 79) to COCO id (90 classes).
@@ -154,12 +154,10 @@ def obj_idx_to_coco_id(obj_idx):
     Returns:
         list[int] or int: The converted COCO id or list of COCO ids.
     """
-    if isinstance(obj_idx, (list, tuple)):
-        return [OBJ_IDX_TO_COCO_ID[i] for i in obj_idx]
-    else:
-        return OBJ_IDX_TO_COCO_ID[obj_idx]
+    return OBJ_IDX_TO_COCO_ID[obj_idx]
 
 
+@nncore.recursive()
 def hoi_idx_to_coco_id(hoi_idx):
     """
     Convert HOI index (0 ~ 599) to COCO id (90 classes).
@@ -170,12 +168,11 @@ def hoi_idx_to_coco_id(hoi_idx):
     Returns:
         list[int] or int: The converted COCO id or list of COCO ids.
     """
-    if isinstance(hoi_idx, (list, tuple)):
-        return [HOI_IDX_TO_COCO_ID[i] for i in hoi_idx]
-    else:
-        return HOI_IDX_TO_COCO_ID[hoi_idx]
+    obj_idx = hoi_idx_to_obj_idx(hoi_idx)
+    return obj_idx_to_coco_id(obj_idx)
 
 
+@nncore.recursive()
 def hoi_idx_to_act_idx(hoi_idx):
     """
     Convert HOI index (0 ~ 599) to action index (0 ~ 116).
@@ -186,12 +183,10 @@ def hoi_idx_to_act_idx(hoi_idx):
     Returns:
         list[int] or int: The converted action index or list of action indexes.
     """
-    if isinstance(hoi_idx, (list, tuple)):
-        return [HOI_IDX_TO_ACT_IDX[i] for i in hoi_idx]
-    else:
-        return HOI_IDX_TO_ACT_IDX[hoi_idx]
+    return HOI_IDX_TO_ACT_IDX[hoi_idx]
 
 
+@nncore.recursive()
 def hoi_idx_to_obj_idx(hoi_idx):
     """
     Convert HOI index (0 ~ 599) to object index (0 ~ 79).
@@ -202,12 +197,10 @@ def hoi_idx_to_obj_idx(hoi_idx):
     Returns:
         list[int] or int: The converted object index or list of object indexes.
     """
-    if isinstance(hoi_idx, (list, tuple)):
-        return [HOI_IDX_TO_OBJ_IDX[i] for i in hoi_idx]
-    else:
-        return HOI_IDX_TO_OBJ_IDX[hoi_idx]
+    return HOI_IDX_TO_OBJ_IDX[hoi_idx]
 
 
+@nncore.recursive()
 def act_idx_to_hoi_idx(act_idx):
     """
     Convert action index (0 ~ 116) to HOI index (0 ~ 599).
@@ -218,12 +211,14 @@ def act_idx_to_hoi_idx(act_idx):
     Returns:
         list[list] or list[int]: The converted HOI indexes.
     """
-    if isinstance(act_idx, (list, tuple)):
-        return [ACT_IDX_TO_HOI_IDX[i] for i in act_idx]
-    else:
-        return ACT_IDX_TO_HOI_IDX[act_idx]
+    hoi_idx = []
+    for idx in range(600):
+        if HOI_IDX_TO_ACT_IDX[idx] == act_idx:
+            hoi_idx.append(idx)
+    return hoi_idx
 
 
+@nncore.recursive()
 def obj_idx_to_hoi_idx(obj_idx):
     """
     Convert object index (0 ~ 79) to HOI index (0 ~ 599).
@@ -234,10 +229,11 @@ def obj_idx_to_hoi_idx(obj_idx):
     Returns:
         list[list] or list[int]: The converted HOI indexes.
     """
-    if isinstance(obj_idx, (list, tuple)):
-        return [OBJ_IDX_TO_HOI_IDX[i] for i in obj_idx]
-    else:
-        return OBJ_IDX_TO_HOI_IDX[obj_idx]
+    hoi_idx = []
+    for idx in range(600):
+        if HOI_IDX_TO_OBJ_IDX[idx] == obj_idx:
+            hoi_idx.append(idx)
+    return hoi_idx
 
 
 def get_act_name(act_idx):
@@ -316,7 +312,7 @@ def get_non_rare_hoi_idx():
     Returns:
         list[int]: The list of non-rare HOI indexes.
     """
-    return NON_RARE_HOI_IDX
+    return [idx for idx in range(600) if idx not in RARE_HOI_IDX]
 
 
 def get_seen_hoi_idx(type, id=None):
@@ -363,11 +359,11 @@ def get_unseen_hoi_idx(type, id=None):
     """
     assert type in ('uc', 'uo', 'ua')
     if type == 'uc':
-        return UNSEEN_COM_HOI_IDX[id]
+        return UC_HOI_IDX[id]
     elif type == 'uo':
-        return UNSEEN_OBJ_HOI_IDX
+        return UO_HOI_IDX
     else:
-        return UNSEEN_ACT_HOI_IDX
+        return UA_HOI_IDX
 
 
 def scatter_hum_to_hoi(tensor):

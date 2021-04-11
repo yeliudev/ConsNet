@@ -56,6 +56,7 @@ def _compute_ap(cls_anno, cls_blob):
     return ap, rec
 
 
+@nncore.recursive(key='mode', type='dict')
 def hico_det_eval(blob,
                   anno,
                   split='test',
@@ -106,24 +107,11 @@ def hico_det_eval(blob,
         2. Liu et al. (https://arxiv.org/abs/2008.06254)
         3. Bansal et al. (https://arxiv.org/abs/1904.03181)
     """
-    if isinstance(anno, str):
-        anno = load_anno(anno, split=split)
-
-    if isinstance(mode, (list, tuple)):
-        results = dict()
-        for m in mode:
-            results.update(
-                hico_det_eval(
-                    blob,
-                    anno,
-                    split=split,
-                    mode=m,
-                    zero_shot=zero_shot,
-                    logger=logger))
-        return results
-
     assert mode in ('def', 'ko')
     nncore.log_or_print(f'Evaluating mAP in *{mode}* mode...', logger)
+
+    if isinstance(anno, str):
+        anno = load_anno(anno, split=split)
 
     rare_idx = get_rare_hoi_idx()
     non_rare_idx = get_non_rare_hoi_idx()
