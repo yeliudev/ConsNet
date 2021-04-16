@@ -53,9 +53,9 @@ def main():
 
     engine = Engine(model, data_loaders, work_dir=work_dir)
 
-    if (checkpoint := args.checkpoint):
+    if checkpoint := args.checkpoint:
         engine.load_checkpoint(checkpoint)
-    elif (checkpoint := args.resume):
+    elif checkpoint := args.resume:
         engine.resume(checkpoint)
 
     engine.launch(eval_mode=args.eval)
