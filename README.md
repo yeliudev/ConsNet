@@ -1,9 +1,9 @@
 # ConsNet
 
-[![DOI](https://badgen.net/badge/DOI/10.1145%2F3394171.3413600/blue?cache=600)](https://doi.org/10.1145/3394171.3413600)
-[![arXiv](https://badgen.net/badge/arXiv/2008.06254/red?cache=600)](https://arxiv.org/abs/2008.06254)
-[![PyPI](https://badgen.net/pypi/v/consnet?label=PyPI&cache=600)](https://pypi.org/project/consnet)
-[![License](https://badgen.net/github/license/yeliudev/ConsNet?label=License&color=cyan&cache=600)](https://github.com/yeliudev/ConsNet/blob/main/LICENSE)
+[![DOI](https://badgen.net/badge/DOI/10.1145%2F3394171.3413600/blue?cache=300)](https://doi.org/10.1145/3394171.3413600)
+[![arXiv](https://badgen.net/badge/arXiv/2008.06254/red?cache=300)](https://arxiv.org/abs/2008.06254)
+[![PyPI](https://badgen.net/pypi/v/consnet?label=PyPI&cache=300)](https://pypi.org/project/consnet)
+[![License](https://badgen.net/github/license/yeliudev/ConsNet?label=License&color=cyan&cache=300)](https://github.com/yeliudev/ConsNet/blob/main/LICENSE)
 
 This repository maintains the official implementation of the paper **ConsNet: Learning Consistency Graph for Zero‐Shot Human‐Object Interaction Detection** by [Ye Liu](https://yeliu.me/), [Junsong Yuan](https://cse.buffalo.edu/~jsyuan/) and [Chang Wen Chen](https://cse.buffalo.edu/faculty/chencw/), which has been accepted by [ACM Multimedia 2020](https://2020.acmmm.org/).
 
