@@ -31,7 +31,7 @@ def convert_anno(anno_file, out_file, split):
     """
     assert isinstance(out_file, str) and out_file.endswith('.json')
     assert split in ('train', 'test')
-    nncore.file_exist(anno_file, raise_error=True)
+    nncore.is_file(anno_file, raise_error=True)
 
     print(f'converting annotations of *{split}* split')
 
@@ -110,7 +110,7 @@ def load_anno(anno_file, split):
         1. Chao et al. (https://arxiv.org/abs/1702.05448)
     """
     assert split in ('train', 'test')
-    nncore.file_exist(anno_file, raise_error=True)
+    nncore.is_file(anno_file, raise_error=True)
 
     mat_anno = loadmat(anno_file)[f'bbox_{split}'][0]
     collected = []

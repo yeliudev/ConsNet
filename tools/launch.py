@@ -38,7 +38,7 @@ def main():
 
     logger = nncore.get_logger(log_file=log_file)
     logger.info(f'Environment Info:\n{nncore.collect_env_info()}')
-    logger.info(f'Config:\n{cfg.text}')
+    logger.info(f'Config: {cfg.text}')
 
     seed = set_random_seed()
     logger.info(f'Using random seed: {seed}')

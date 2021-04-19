@@ -21,7 +21,7 @@ class SemanticBlock(nn.Module):
         self._use_cache = False
         self._cache = None
 
-        if graph is not None and nncore.file_exist(graph):
+        if graph is not None and nncore.is_file(graph):
             graph = nncore.load(graph)
             nodes, graph = graph['nodes'], graph['graph']
         else:
