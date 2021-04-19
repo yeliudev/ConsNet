@@ -61,6 +61,7 @@ def convert_anno(anno_file, out_file, split):
                         id=anno_id,
                         image_id=img_id,
                         category_id=cat_id,
+                        iscrowd=0,
                         bbox=[x, y, w, h],
                         area=w * h)
                     anno.append(ins_anno)
