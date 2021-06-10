@@ -20,9 +20,9 @@ jobs:
       run: pip install --upgrade setuptools wheel isort yapf flake8
     - name: Check code style
       run: |
-        isort --df configs/ consnet/ tools/ setup.py
-        yapf -r -d configs/ consnet/ tools/ setup.py
-        flake8 configs/ consnet/ tools/ setup.py
+        isort --df configs consnet tools setup.py
+        yapf -r -d configs consnet tools setup.py
+        flake8 configs consnet tools setup.py
     - name: Install ConsNet
       run: pip install -e .
     - name: Verify the installation
