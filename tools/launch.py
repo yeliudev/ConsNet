@@ -20,7 +20,7 @@ def parse_args():
         default='configs/consnet_5e_hico_det.py')
     parser.add_argument('--checkpoint', help='load a checkpoint')
     parser.add_argument('--resume', help='resume from a checkpoint')
-    parser.add_argument('--eval', action='store_true', help='evaluation mode')
+    parser.add_argument('--eval', help='evaluation mode', action='store_true')
     args = parser.parse_args()
     return args
 
