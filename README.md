@@ -5,7 +5,7 @@
 [![PyPI](https://badgen.net/pypi/v/consnet?label=PyPI&cache=300)](https://pypi.org/project/consnet)
 [![License](https://badgen.net/github/license/yeliudev/ConsNet?label=License&color=cyan&cache=300)](https://github.com/yeliudev/ConsNet/blob/main/LICENSE)
 
-This repository maintains the official implementation of the paper **ConsNet: Learning Consistency Graph for Zero‐Shot Human‐Object Interaction Detection** by [Ye Liu](https://yeliu.me/), [Junsong Yuan](https://cse.buffalo.edu/~jsyuan/) and [Chang Wen Chen](https://cse.buffalo.edu/faculty/chencw/), which has been accepted by [ACM Multimedia 2020](https://2020.acmmm.org/).
+This repository maintains the official implementation of the paper **ConsNet: Learning Consistency Graph for Zero‐Shot Human‐Object Interaction Detection** by [Ye Liu](https://yeliu.me/), [Junsong Yuan](https://cse.buffalo.edu/~jsyuan/) and [Chang Wen Chen](https://www4.comp.polyu.edu.hk/~chencw/), which has been accepted by [ACM Multimedia 2020](https://2020.acmmm.org/).
 
 <p align="center"><img src="https://raw.githubusercontent.com/yeliudev/ConsNet/main/.github/model.svg"></p>
 
@@ -59,16 +59,13 @@ We pre-extract the visual features of all the humans and objects in the dataset 
 1. Download the checkpoints of object detector and ELMo.
 
 ```shell
-ROOT='https://s3-us-west-2.amazonaws.com/allennlp/models/elmo'
-ELMO='2x4096_512_2048cnn_2xhighway_5.5B'
+# Object detector checkpoints
+wget https://dl.catcatdev.com/consnet/faster_rcnn_r50_fpn_3x_coco-26df6f6b.pth
+wget https://dl.catcatdev.com/consnet/faster_rcnn_r50_fpn_20e_hico_det-77b91312.pth
 
-# Download object detector checkpoints
-wget https://catcatserver.xyz/models/faster_rcnn_r50_fpn_3x_coco-26df6f6b.pth
-wget https://catcatserver.xyz/models/faster_rcnn_r50_fpn_20e_hico_det-77b91312.pth
-
-# Download ELMo options and weights
-wget ${ROOT}/${ELMO}/elmo_${ELMO}_options.json
-wget ${ROOT}/${ELMO}/elmo_${ELMO}_weights.hdf5
+# ELMo options and weights
+wget https://dl.catcatdev.com/consnet/elmo_2x4096_512_2048cnn_2xhighway_5.5B_options.json
+wget https://dl.catcatdev.com/consnet/elmo_2x4096_512_2048cnn_2xhighway_5.5B_weights.hdf5
 ```
 
 2. Download [HICO-DET](http://www-personal.umich.edu/~ywchao/hico/) dataset and prepare the files in the following structure.
@@ -143,7 +140,7 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
   </tr>
   <tr>
     <td align="center" rowspan="5">
-      <a href="https://catcatserver.xyz/models/faster_rcnn_r50_fpn_3x_coco-26df6f6b.pth">COCO</a>
+      <a href="https://dl.catcatdev.com/consnet/faster_rcnn_r50_fpn_3x_coco-26df6f6b.pth">COCO</a>
     </td>
     <td align="center">
       <a href="https://github.com/yeliudev/ConsNet/blob/main/configs/consnet_uc_5e_hico_det.py">ConsNet</a>
@@ -155,8 +152,8 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
     <td align="center">20.69</td>
     <td align="center">16.13</td>
     <td align="center">
-      <a href="https://catcatserver.xyz/models/consnet/consnet_uc_5e_hico_det/consnet_uc_5e_hico_det-51fed08b.pth">model</a> |
-      <a href="https://catcatserver.xyz/models/consnet/consnet_uc_5e_hico_det/metrics.json">metrics</a>
+      <a href="https://dl.catcatdev.com/consnet/consnet_uc_5e_hico_det-3a355824.pth">model</a> |
+      <a href="https://dl.catcatdev.com/consnet/consnet_uc_5e_hico_det.json">metrics</a>
     </td>
   </tr>
   <tr>
@@ -170,8 +167,8 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
     <td align="center">20.99</td>
     <td align="center">19.27</td>
     <td align="center">
-      <a href="https://catcatserver.xyz/models/consnet/consnet_uo_5e_hico_det/consnet_uo_5e_hico_det-a16a94c3.pth">model</a> |
-      <a href="https://catcatserver.xyz/models/consnet/consnet_uo_5e_hico_det/metrics.json">metrics</a>
+      <a href="https://dl.catcatdev.com/consnet/consnet_uo_5e_hico_det-21652552.pth">model</a> |
+      <a href="https://dl.catcatdev.com/consnet/consnet_uo_5e_hico_det.json">metrics</a>
     </td>
   </tr>
   <tr>
@@ -185,8 +182,8 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
     <td align="center">20.02</td>
     <td align="center">14.12</td>
     <td align="center">
-      <a href="https://catcatserver.xyz/models/consnet/consnet_ua_5e_hico_det/consnet_ua_5e_hico_det-7ac20fbf.pth">model</a> |
-      <a href="https://catcatserver.xyz/models/consnet/consnet_ua_5e_hico_det/metrics.json">metrics</a>
+      <a href="https://dl.catcatdev.com/consnet/consnet_ua_5e_hico_det-492bab60.pth">model</a> |
+      <a href="https://dl.catcatdev.com/consnet/consnet_ua_5e_hico_det.json">metrics</a>
     </td>
   </tr>
   <tr>
@@ -200,8 +197,8 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
     <td align="center">—</td>
     <td align="center">—</td>
     <td align="center" rowspan="2">
-      <a href="https://catcatserver.xyz/models/consnet/consnet_5e_hico_det/consnet_5e_hico_det-6e89e1d9.pth">model</a> |
-      <a href="https://catcatserver.xyz/models/consnet/consnet_5e_hico_det/metrics.json">metrics</a>
+      <a href="https://dl.catcatdev.com/consnet/consnet_5e_hico_det-684a879d.pth">model</a> |
+      <a href="https://dl.catcatdev.com/consnet/consnet_5e_hico_det.json">metrics</a>
     </td>
   </tr>
   <tr>
@@ -217,7 +214,7 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
   </tr>
   <tr>
     <td align="center">
-      <a href="https://catcatserver.xyz/models/faster_rcnn_r50_fpn_20e_hico_det-77b91312.pth">HICO-DET</a>
+      <a href="https://dl.catcatdev.com/consnet/faster_rcnn_r50_fpn_20e_hico_det-77b91312.pth">HICO-DET</a>
     </td>
     <td align="center">
       <a href="https://github.com/yeliudev/ConsNet/blob/main/configs/consnet_5e_hico_det.py">ConsNet-F</a>
@@ -229,8 +226,8 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
     <td align="center">—</td>
     <td align="center">—</td>
     <td align="center">
-      <a href="https://catcatserver.xyz/models/consnet/consnet_f_5e_hico_det/consnet_f_5e_hico_det-efb4f659.pth">model</a> |
-      <a href="https://catcatserver.xyz/models/consnet/consnet_f_5e_hico_det/metrics.json">metrics</a>
+      <a href="https://dl.catcatdev.com/consnet/consnet_f_5e_hico_det-44c8412c.pth">model</a> |
+      <a href="https://dl.catcatdev.com/consnet/consnet_f_5e_hico_det.json">metrics</a>
     </td>
   </tr>
 </table>

@@ -47,7 +47,7 @@ setup(
         'Topic :: Utilities',
     ],
     python_requires='>=3.8',
-    install_requires=['nncore>=0.2.4', 'scipy>=1.6', 'torch>=1.6'],
+    install_requires=['nncore==0.2.4', 'scipy>=1.6', 'torch>=1.6'],
     extras_require={
         'full': [
             'allennlp>=2.2,<2.3', 'mmcv-full>=1.3,<1.4', 'mmdet>=2.11,<2.12',
