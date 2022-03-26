@@ -7,7 +7,7 @@
 
 This repository maintains the official implementation of the paper **ConsNet: Learning Consistency Graph for Zero‐Shot Human‐Object Interaction Detection** by [Ye Liu](https://yeliu.me/), [Junsong Yuan](https://cse.buffalo.edu/~jsyuan/) and [Chang Wen Chen](https://www4.comp.polyu.edu.hk/~chencw/), which has been accepted by [ACM Multimedia 2020](https://2020.acmmm.org/).
 
-<p align="center"><img src="https://raw.githubusercontent.com/yeliudev/ConsNet/main/.github/model.svg"></p>
+<p align="center"><img width="850" src="https://raw.githubusercontent.com/yeliudev/ConsNet/main/.github/model.svg"></p>
 
 ## Installation
 
@@ -59,13 +59,16 @@ We pre-extract the visual features of all the humans and objects in the dataset 
 1. Download the checkpoints of object detector and ELMo.
 
 ```shell
-# Object detector checkpoints
+ROOT='https://s3-us-west-2.amazonaws.com/allennlp/models/elmo'
+ELMO='2x4096_512_2048cnn_2xhighway_5.5B'
+
+# Download object detector checkpoints
 wget https://dl.catcatdev.com/consnet/faster_rcnn_r50_fpn_3x_coco-26df6f6b.pth
 wget https://dl.catcatdev.com/consnet/faster_rcnn_r50_fpn_20e_hico_det-77b91312.pth
 
-# ELMo options and weights
-wget https://dl.catcatdev.com/consnet/elmo_2x4096_512_2048cnn_2xhighway_5.5B_options.json
-wget https://dl.catcatdev.com/consnet/elmo_2x4096_512_2048cnn_2xhighway_5.5B_weights.hdf5
+# Download ELMo options and weights
+wget ${ROOT}/${ELMO}/elmo_${ELMO}_options.json
+wget ${ROOT}/${ELMO}/elmo_${ELMO}_weights.hdf5
 ```
 
 2. Download [HICO-DET](http://www-personal.umich.edu/~ywchao/hico/) dataset and prepare the files in the following structure.
@@ -242,7 +245,7 @@ Thanks to the modulized implementation based on [NNCore](https://github.com/yeli
 
 If you find this project useful for your research, please kindly cite our paper.
 
-```
+```bibtex
 @inproceedings{liu2020consnet,
   title={ConsNet: Learning Consistency Graph for Zero-Shot Human-Object Interaction Detection},
   author={Liu, Ye and Yuan, Junsong and Chen, Chang Wen},

@@ -123,7 +123,7 @@ def pair_nms(bboxes,
 
                 keep = iou >= soft_thr
                 if method == 'linear':
-                    blob[i + 1:, -1][keep] *= (1 - iou[keep])
+                    blob[i + 1:, -1][keep] *= 1 - iou[keep]
                 else:
                     blob[i + 1:, -1][keep] *= (-iou[keep].pow(2) / sigma).exp()
 
