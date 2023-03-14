@@ -5,7 +5,7 @@
 [![PyPI](https://badgen.net/pypi/v/consnet?label=PyPI&cache=300)](https://pypi.org/project/consnet)
 [![License](https://badgen.net/github/license/yeliudev/ConsNet?label=License&color=cyan&cache=300)](https://github.com/yeliudev/ConsNet/blob/main/LICENSE)
 
-This repository maintains the official implementation of the paper **ConsNet: Learning Consistency Graph for Zero‐Shot Human‐Object Interaction Detection** by [Ye Liu](https://yeliu.me/), [Junsong Yuan](https://cse.buffalo.edu/~jsyuan/) and [Chang Wen Chen](https://www4.comp.polyu.edu.hk/~chencw/), which has been accepted by [ACM Multimedia 2020](https://2020.acmmm.org/).
+This repository maintains the official implementation of the paper **ConsNet: Learning Consistency Graph for Zero‐Shot Human‐Object Interaction Detection** by [Ye Liu](https://yeliu.dev/), [Junsong Yuan](https://cse.buffalo.edu/~jsyuan/) and [Chang Wen Chen](https://web.comp.polyu.edu.hk/chencw/), which has been accepted by [ACM Multimedia 2020](https://2020.acmmm.org/).
 
 <p align="center"><img width="850" src="https://raw.githubusercontent.com/yeliudev/ConsNet/main/.github/model.svg"></p>
 
