@@ -26,9 +26,10 @@ class ConsNet(nn.Module):
         self._test_cfg = test_cfg
 
         self.blocks = nn.ModuleDict(
-            OrderedDict(
-                {k: build_block(v, stream=k)
-                 for k, v in modules.items()}))
+            OrderedDict({
+                k: build_block(v, stream=k)
+                for k, v in modules.items()
+            }))
 
         if train_cfg is not None:
             self.ind_loss = build_loss(train_cfg['ind_loss'])

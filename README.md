@@ -249,7 +249,7 @@ If you find this project useful for your research, please kindly cite our paper.
 @inproceedings{liu2020consnet,
   title={ConsNet: Learning Consistency Graph for Zero-Shot Human-Object Interaction Detection},
   author={Liu, Ye and Yuan, Junsong and Chen, Chang Wen},
-  booktitle={Proceedings of the 28th ACM International Conference on Multimedia},
+  booktitle={Proceedings of The ACM International Conference on Multimedia (MM)},
   pages={4235--4243},
   year={2020}
 }
