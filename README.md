@@ -63,8 +63,8 @@ ROOT='https://s3-us-west-2.amazonaws.com/allennlp/models/elmo'
 ELMO='2x4096_512_2048cnn_2xhighway_5.5B'
 
 # Download object detector checkpoints
-wget https://dl.catcatdev.com/consnet/faster_rcnn_r50_fpn_3x_coco-26df6f6b.pth
-wget https://dl.catcatdev.com/consnet/faster_rcnn_r50_fpn_20e_hico_det-77b91312.pth
+wget https://huggingface.co/yeliudev/ConsNet/resolve/main/faster_rcnn_r50_fpn_3x_coco-26df6f6b.pth
+wget https://huggingface.co/yeliudev/ConsNet/resolve/main/faster_rcnn_r50_fpn_20e_hico_det-77b91312.pth
 
 # Download ELMo options and weights
 wget ${ROOT}/${ELMO}/elmo_${ELMO}_options.json
@@ -143,7 +143,7 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
   </tr>
   <tr>
     <td align="center" rowspan="5">
-      <a href="https://dl.catcatdev.com/consnet/faster_rcnn_r50_fpn_3x_coco-26df6f6b.pth">COCO</a>
+      <a href="https://huggingface.co/yeliudev/ConsNet/resolve/main/faster_rcnn_r50_fpn_3x_coco-26df6f6b.pth">COCO</a>
     </td>
     <td align="center">
       <a href="https://github.com/yeliudev/ConsNet/blob/main/configs/consnet_uc_5e_hico_det.py">ConsNet</a>
@@ -155,8 +155,8 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
     <td align="center">20.69</td>
     <td align="center">16.13</td>
     <td align="center">
-      <a href="https://dl.catcatdev.com/consnet/consnet_uc_5e_hico_det-3a355824.pth">model</a> |
-      <a href="https://dl.catcatdev.com/consnet/consnet_uc_5e_hico_det.json">metrics</a>
+      <a href="https://huggingface.co/yeliudev/ConsNet/resolve/main/consnet_uc_5e_hico_det-3a355824.pth">model</a> |
+      <a href="https://huggingface.co/yeliudev/ConsNet/resolve/main/consnet_uc_5e_hico_det.json">metrics</a>
     </td>
   </tr>
   <tr>
@@ -170,8 +170,8 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
     <td align="center">20.99</td>
     <td align="center">19.27</td>
     <td align="center">
-      <a href="https://dl.catcatdev.com/consnet/consnet_uo_5e_hico_det-21652552.pth">model</a> |
-      <a href="https://dl.catcatdev.com/consnet/consnet_uo_5e_hico_det.json">metrics</a>
+      <a href="https://huggingface.co/yeliudev/ConsNet/resolve/main/consnet_uo_5e_hico_det-21652552.pth">model</a> |
+      <a href="https://huggingface.co/yeliudev/ConsNet/resolve/main/consnet_uo_5e_hico_det.json">metrics</a>
     </td>
   </tr>
   <tr>
@@ -185,8 +185,8 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
     <td align="center">20.02</td>
     <td align="center">14.12</td>
     <td align="center">
-      <a href="https://dl.catcatdev.com/consnet/consnet_ua_5e_hico_det-492bab60.pth">model</a> |
-      <a href="https://dl.catcatdev.com/consnet/consnet_ua_5e_hico_det.json">metrics</a>
+      <a href="https://huggingface.co/yeliudev/ConsNet/resolve/main/consnet_ua_5e_hico_det-492bab60.pth">model</a> |
+      <a href="https://huggingface.co/yeliudev/ConsNet/resolve/main/consnet_ua_5e_hico_det.json">metrics</a>
     </td>
   </tr>
   <tr>
@@ -200,8 +200,8 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
     <td align="center">—</td>
     <td align="center">—</td>
     <td align="center" rowspan="2">
-      <a href="https://dl.catcatdev.com/consnet/consnet_5e_hico_det-684a879d.pth">model</a> |
-      <a href="https://dl.catcatdev.com/consnet/consnet_5e_hico_det.json">metrics</a>
+      <a href="https://huggingface.co/yeliudev/ConsNet/resolve/main/consnet_5e_hico_det-684a879d.pth">model</a> |
+      <a href="https://huggingface.co/yeliudev/ConsNet/resolve/main/consnet_5e_hico_det.json">metrics</a>
     </td>
   </tr>
   <tr>
@@ -217,7 +217,7 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
   </tr>
   <tr>
     <td align="center">
-      <a href="https://dl.catcatdev.com/consnet/faster_rcnn_r50_fpn_20e_hico_det-77b91312.pth">HICO-DET</a>
+      <a href="https://huggingface.co/yeliudev/ConsNet/resolve/main/faster_rcnn_r50_fpn_20e_hico_det-77b91312.pth">HICO-DET</a>
     </td>
     <td align="center">
       <a href="https://github.com/yeliudev/ConsNet/blob/main/configs/consnet_5e_hico_det.py">ConsNet-F</a>
@@ -229,8 +229,8 @@ We provide multiple HICO-DET pre-trained models here. All the models are trained
     <td align="center">—</td>
     <td align="center">—</td>
     <td align="center">
-      <a href="https://dl.catcatdev.com/consnet/consnet_f_5e_hico_det-44c8412c.pth">model</a> |
-      <a href="https://dl.catcatdev.com/consnet/consnet_f_5e_hico_det.json">metrics</a>
+      <a href="https://huggingface.co/yeliudev/ConsNet/resolve/main/consnet_f_5e_hico_det-44c8412c.pth">model</a> |
+      <a href="https://huggingface.co/yeliudev/ConsNet/resolve/main/consnet_f_5e_hico_det.json">metrics</a>
     </td>
   </tr>
 </table>
