@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 
 project = 'ConsNet API'
-copyright = '2021, Ye Liu'
+copyright = '2025, Ye Liu'
 author = 'Ye Liu'
 
 

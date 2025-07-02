@@ -1,7 +1,7 @@
 # -----------------------------------------------------
 # ConsNet
 # Licensed under the GNU General Public License v3.0
-# Written by Ye Liu (ye-liu at whu.edu.cn)
+# Written by Ye Liu (coco.ye.liu@connect.polyu.hk)
 # -----------------------------------------------------
 
 import os
@@ -52,6 +52,7 @@ setup(
         'full': [
             'allennlp>=2.2,<2.3', 'mmcv-full>=1.3,<1.4', 'mmdet>=2.11,<2.12',
             'torchvision>=0.7,<0.10'
-        ]
+        ],
+        'docs': ['sphinx-rtd-theme']
     },
     packages=find_packages(exclude=('.github', 'configs', 'docs', 'tools')))

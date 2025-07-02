@@ -1,7 +1,18 @@
 version: 2
 
+build:
+  os: ubuntu-lts-latest
+  tools:
+    python: '3.8'
+  jobs:
+    pre_install:
+      - python -m pip install --upgrade --no-cache-dir wheel
+
+sphinx:
+  configuration: docs/conf.py
+
 python:
-   version: 3.8
-   install:
-    - method: setuptools
-      path: .
+  install:
+    - path: .
+      extra_requirements:
+        - docs

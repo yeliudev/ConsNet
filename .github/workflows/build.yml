@@ -4,26 +4,22 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python: [3.8, 3.9]
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python }}
-    - name: Install requirements
-      run: pip install --upgrade setuptools wheel isort yapf flake8
-    - name: Check code style
-      run: |
-        isort --df configs consnet tools setup.py
-        yapf -r -d configs consnet tools setup.py
-        flake8 configs consnet tools setup.py
-    - name: Install ConsNet
-      run: pip install -e .
-    - name: Verify the installation
-      run: python -c 'import consnet'
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.8
+      - name: Install requirements
+        run: pip install --upgrade setuptools wheel isort yapf flake8
+      - name: Check code style
+        run: |
+          isort --df configs consnet tools setup.py
+          yapf -r -d configs consnet tools setup.py
+          flake8 configs consnet tools setup.py
+      - name: Install ConsNet
+        run: pip install -e .
+      - name: Verify the installation
+        run: python -c 'import consnet'

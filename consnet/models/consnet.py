@@ -1,7 +1,7 @@
 # -----------------------------------------------------
 # ConsNet
 # Licensed under the GNU General Public License v3.0
-# Written by Ye Liu (ye-liu at whu.edu.cn)
+# Written by Ye Liu (coco.ye.liu@connect.polyu.hk)
 # -----------------------------------------------------
 
 from collections import OrderedDict, defaultdict
